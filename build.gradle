@@ -1,0 +1,38 @@
+group 'es.sandbox.snippet.pattern'
+version '0.1.0-SNAPSHOT'
+
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'jacoco'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+ext {
+    jacocoVersion = '0.7.5+'
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    testCompile(
+            'org.codehaus.groovy:groovy-all:2.4.4',
+            'org.spockframework:spock-core:1.1-groovy-2.4-rc-2'
+    )
+}
+
+jacoco {
+    toolVersion = jacocoVersion
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.enabled true
+    }
+}
+test.finalizedBy jacocoTestReport
