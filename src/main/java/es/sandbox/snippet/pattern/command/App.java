@@ -7,14 +7,14 @@ public class App {
 
     public static void main(String[] args) {
 
-        ExecutorService executorService = new ExecutorService();
-
+        CommandExecutor commandExecutor = new CommandExecutor();
         RepeaterCommand repeaterCommand = new RepeaterCommand("hello word!");
-        executorService.execute(repeaterCommand)
+        commandExecutor.execute(repeaterCommand)
             .ifPresent(System.out::println);
 
+        TargetedCommandExecutor targetedCommandExecutor = new TargetedCommandExecutor(Service.off());
         ServiceToggleCommand serviceToggleCommand = new ServiceToggleCommand();
-        executorService.execute(serviceToggleCommand, Service.off())
+        targetedCommandExecutor.execute(serviceToggleCommand)
             .ifPresent(System.out::println);
     }
 }
